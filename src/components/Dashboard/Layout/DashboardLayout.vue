@@ -33,19 +33,15 @@
       <dashboard-content @click="toggleSidebar">
 
       </dashboard-content>
-
-      <content-footer></content-footer>
     </div>
   </div>
 </template>
-<style lang="scss">
-
-</style>
 <script>
   import TopNavbar from './TopNavbar.vue'
   import DashboardContent from './Content.vue'
   import MobileMenu from './MobileMenu.vue'
   export default {
+    name: 'DashboardLayout',
     components: {
       TopNavbar,
       DashboardContent,

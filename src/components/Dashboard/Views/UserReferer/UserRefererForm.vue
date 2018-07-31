@@ -7,14 +7,14 @@
           <fg-input type="text"
                     label="Empresa"
                     placeholder="Nombre de la empresa"
-                    v-model="user.company">
+                    v-model="company">
           </fg-input>
         </div>
         <div class="col-md-7">
           <fg-input type="email"
                     label="E-mail"
                     placeholder="Email"
-                    v-model="user.email">
+                    v-model="email">
           </fg-input>
         </div>
       </div>
@@ -24,28 +24,30 @@
           <fg-input type="text"
                     label="Nombre"
                     placeholder="Nombre"
-                    v-model="user.firstName">
+                    v-model="firstName">
           </fg-input>
         </div>
         <div class="col-md-6">
           <fg-input type="text"
                     label="Apellido"
                     placeholder="Nombre"
-                    v-model="user.lastName">
+                    v-model="lastName">
           </fg-input>
         </div>
       </div>
 
       <div class="text-center">
-        <button type="submit" class="btn btn-info btn-fill float-right" @click.prevent="updateProfile">
+        <!-- <button type="submit" class="btn btn-info btn-fill float-right" @click.prevent="updateProfile">
           Crear Perfil
-        </button>
+        </button> -->
       </div>
       <div class="clearfix"></div>
     </form>
   </card>
 </template>
 <script>
+/* eslint-disable */
+  import { mapFields } from 'vuex-map-fields'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
 
   export default {
@@ -54,18 +56,23 @@
     },
     data () {
       return {
-        user: {
-          company: 'Prueba',
-          email: 'carlos@prueba.com',
-          firstName: 'Carlos',
-          lastName: 'Perez'
-        }
       }
     },
+    computed: {
+      ...mapFields([
+        'firstName',
+        'lastName',
+        'company',
+        'email',
+      ]),
+    },
     methods: {
-      updateProfile () {
-        alert('Your data: ' + JSON.stringify(this.user))
-      }
+      // updateProfile () {
+      //   alert('Your data: ' + JSON.stringify(this.user))
+      // },
+      // actualizarContacto(user){
+      //   this.$store.commit('contacto/agregarContacto', this.user)
+      // }
     }
   }
 

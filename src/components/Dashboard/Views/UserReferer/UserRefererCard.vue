@@ -2,13 +2,13 @@
       <card>
 			<div class="userProfileInfo">
 				<div class="image text-center">
-                    <qrcode v-bind:value="user.firstName" :options="{ size: 200 }" class="img-responsive"></qrcode>
+                    <qrcode v-bind:value="firstName" :options="{ size: 200 }" class="img-responsive"></qrcode>
 				</div>
 				<div class="box">
-					<div class="name"><strong>{{user.firstName}} {{user.lastName}}</strong></div>
+					<div class="name"><strong>{{firstName}} {{lastName}}</strong></div>
 					<div class="info">
-						<span><i class="fa fa-fw fa-list-alt"></i> <a v-bind:href="'mailto:'+user.email" title="#">{{user.email}}</a></span>
-						<span><i class="fa fa-fw fa-usd"></i> {{user.company}}</span>
+						<span><i class="fa fa-fw fa-list-alt"></i> <a v-bind:href="'mailto:'+email" title="#">{{email}}</a></span>
+						<span><i class="fa fa-fw fa-usd"></i> {{company}}</span>
 					</div>
 				</div>
                 <div class="socialIcons clearfix">
@@ -26,6 +26,9 @@
 		</card>
 </template>
 <script>
+/* eslint-disable */
+  import { mapFields } from 'vuex-map-fields'
+  import { mapState } from 'vuex'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import VueQrcode from '@xkeshi/vue-qrcode'
   export default {
@@ -33,16 +36,19 @@
       Card,
       VueQrcode
     },
-    data () {
-      return {
-        user: {
-          company: 'Prueba',
-          email: 'carlos@prueba.com',
-          firstName: 'Carlos',
-          lastName: 'Perez'
-        }
-      }
+    computed: {
+      ...mapFields([
+        'firstName',
+        'lastName',
+        'company',
+        'email'
+      ]),
     },
+    watch:{
+        firstName(val, old){
+            console.log(val)
+        }
+    },  
     methods: {
       getClasses (index) {
         var remainder = index % 3
