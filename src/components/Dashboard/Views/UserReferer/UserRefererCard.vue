@@ -2,13 +2,13 @@
       <card>
 			<div class="userProfileInfo">
 				<div class="image text-center">
-                    <qrcode v-bind:value="firstName" :options="{ size: 200 }" class="img-responsive"></qrcode>
+                    <qrcode v-bind:value="form.firstName" :options="{ size: 200 }" class="img-responsive"></qrcode>
 				</div>
 				<div class="box">
-					<div class="name"><strong>{{firstName}} {{lastName}}</strong></div>
+					<div class="name"><strong>{{form.firstName}} {{form.lastName}}</strong></div>
 					<div class="info">
-						<span><i class="fa fa-fw fa-list-alt"></i> <a v-bind:href="'mailto:'+email" title="#">{{email}}</a></span>
-						<span><i class="fa fa-fw fa-usd"></i> {{company}}</span>
+						<span><i class="fa fa-fw fa-list-alt"></i> <a v-bind:href="'mailto:'+form.email" title="#">{{form.email}}</a></span>
+						<span><i class="fa fa-fw fa-usd"></i> {{form.company}}</span>
 					</div>
 				</div>
                 <div class="socialIcons clearfix">
@@ -37,17 +37,7 @@
       VueQrcode
     },
     computed: {
-      ...mapFields([
-        'firstName',
-        'lastName',
-        'company',
-        'email'
-      ]),
-    },
-    watch:{
-        firstName(val, old){
-            console.log(val)
-        }
+      ...mapFields(['form']),
     },  
     methods: {
       getClasses (index) {

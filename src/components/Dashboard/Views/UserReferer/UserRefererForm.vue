@@ -7,14 +7,14 @@
           <fg-input type="text"
                     label="Empresa"
                     placeholder="Nombre de la empresa"
-                    v-model="company">
+                    v-model="form.company">
           </fg-input>
         </div>
         <div class="col-md-7">
           <fg-input type="email"
                     label="E-mail"
                     placeholder="Email"
-                    v-model="email">
+                    v-model="form.email">
           </fg-input>
         </div>
       </div>
@@ -24,14 +24,14 @@
           <fg-input type="text"
                     label="Nombre"
                     placeholder="Nombre"
-                    v-model="firstName">
+                    v-model="form.firstName">
           </fg-input>
         </div>
         <div class="col-md-6">
           <fg-input type="text"
                     label="Apellido"
                     placeholder="Nombre"
-                    v-model="lastName">
+                    v-model="form.lastName">
           </fg-input>
         </div>
       </div>
@@ -59,12 +59,7 @@
       }
     },
     computed: {
-      ...mapFields([
-        'firstName',
-        'lastName',
-        'company',
-        'email',
-      ]),
+      ...mapFields(['form']), // mapeas el form entero y cuando queres mostrar las props. usas el objeto form.[prop]
     },
     methods: {
       // updateProfile () {
