@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import contacto from './modules/userReferer'
+import UserReferer from './modules/userReferer'
+import Contactos from './modules/contactos'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    contacto
+    UserReferer,
+    Contactos
   }
 })

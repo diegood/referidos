@@ -1,45 +1,49 @@
 <template>
   <card>
     <h4 slot="header" class="card-title">Nuevo Referido</h4>
-    <form>
-      <div class="row">
-        <div class="col-md-5">
-          <fg-input type="text"
-                    label="Empresa"
-                    placeholder="Nombre de la empresa"
-                    v-model="form.company">
-          </fg-input>
-        </div>
-        <div class="col-md-7">
-          <fg-input type="email"
-                    label="E-mail"
-                    placeholder="Email"
-                    v-model="form.email">
-          </fg-input>
-        </div>
-      </div>
-
+    <form @submit="actualizarContacto">
       <div class="row">
         <div class="col-md-6">
           <fg-input type="text"
                     label="Nombre"
                     placeholder="Nombre"
-                    v-model="form.firstName">
+                    v-model="form.firstName"
+                    required>
           </fg-input>
         </div>
         <div class="col-md-6">
           <fg-input type="text"
                     label="Apellido"
                     placeholder="Nombre"
-                    v-model="form.lastName">
+                    v-model="form.lastName"
+                    required>
           </fg-input>
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-md-6">
+          <fg-input type="email"
+                    label="E-mail"
+                    placeholder="Email"
+                    v-model="form.email"
+                    required>
+          </fg-input>
+        </div>
+        <div class="col-md-6">
+          <fg-input type="text"
+                    label="Empresa"
+                    placeholder="Nombre de la empresa"
+                    v-model="form.company">
+          </fg-input>
+        </div>
+      </div>
+
+
       <div class="text-center">
-        <!-- <button type="submit" class="btn btn-info btn-fill float-right" @click.prevent="updateProfile">
+        <button type="submit" class="btn btn-info btn-fill float-right">
           Crear Perfil
-        </button> -->
+        </button>
       </div>
       <div class="clearfix"></div>
     </form>
@@ -47,7 +51,8 @@
 </template>
 <script>
 /* eslint-disable */
-  import { mapFields } from 'vuex-map-fields'
+  import { mapState } from 'vuex'
+  import { mapFields} from 'vuex-map-fields'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
 
   export default {
@@ -62,12 +67,24 @@
       ...mapFields(['form']), // mapeas el form entero y cuando queres mostrar las props. usas el objeto form.[prop]
     },
     methods: {
-      // updateProfile () {
-      //   alert('Your data: ' + JSON.stringify(this.user))
-      // },
-      // actualizarContacto(user){
-      //   this.$store.commit('contacto/agregarContacto', this.user)
-      // }
+      actualizarContacto(e){
+        e.preventDefault();
+          this.$store.commit('Contactos/addUserReferer', this.form)
+          this.form = []
+          this.creationMenssage()
+      },
+      creationMenssage () {
+        const notification = {
+          template: `<span>El usuario fue <b>creado Correctamente!.</b></span>`
+        }
+        this.$notifications.notify({
+            component: notification,
+            icon: 'nc-icon nc-single-02',
+            horizontalAlign: 'center',
+            verticalAlign: 'top',
+            type: 'info'
+          })
+      }
     }
   }
 

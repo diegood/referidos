@@ -28,7 +28,6 @@
 <script>
 /* eslint-disable */
   import { mapFields } from 'vuex-map-fields'
-  import { mapState } from 'vuex'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import VueQrcode from '@xkeshi/vue-qrcode'
   export default {
