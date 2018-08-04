@@ -6,9 +6,9 @@
 				</div>
 				<div class="box">
 					<div class="name"><strong>{{form.firstName}} {{form.lastName}}</strong></div>
-					<div class="info">
-						<span><i class="fa fa-fw fa-list-alt"></i> <a v-bind:href="'mailto:'+form.email" title="#">{{form.email}}</a></span>
-						<span><i class="fa fa-fw fa-usd"></i> {{form.company}}</span>
+					<div v-if="form.email" class="info">
+						<span><i class="nc-icon nc-email-83"></i> <a v-bind:href="'mailto:'+form.email" title="#"> {{form.email}}</a></span>
+						<span v-if="form.company"><i class="nc-icon nc-bank"></i> {{form.company}}</span>
 					</div>
 				</div>
                 <div class="socialIcons clearfix">
@@ -36,7 +36,7 @@
       VueQrcode
     },
     computed: {
-      ...mapFields(['form']),
+      ...mapFields(['form'])
     },  
     methods: {
       getClasses (index) {

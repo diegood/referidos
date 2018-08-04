@@ -1,4 +1,5 @@
 <template>
+<div>
   <table class="table">
     <thead>
       <slot name="columns">
@@ -9,22 +10,49 @@
     </thead>
     <tbody>
       <!-- eslint-disable-next-line -->
-      <tr v-for="userReferer in UsersReferers">
+      <tr v-for="userReferer in UsersReferers"  v-b-modal.verClienteModal @click="setCardInfo(userReferer)">
           <td>{{userReferer.firstName}}</td>
           <td>{{userReferer.company}}</td>
           <td>{{userReferer.email}}</td>
       </tr>
     </tbody>
   </table> 
+  <div class="hide">
+      <!-- Modal -->
+      <b-modal id="verClienteModal" size="lg" title="Cliente">
+        <UserRefererCard></UserRefererCard>
+      </b-modal>
+  </div>
+</div>
 </template>
 <script>
 /* eslint-disable */
+    import bModal from 'bootstrap-vue/es/components/modal/modal'
+    import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+    import UserRefererCard from 'src/components/Dashboard/Views/UserReferer/UserRefererCard.vue'
     import { mapState} from "vuex";
     export default {
         name: "UserRefererList",
+        data () {
+          return {
+            contactoId: ""
+          }
+        },
         computed: mapState({
             UsersReferers: state => state.Contactos.usersReferers
         }),
+        methods:{
+          setCardInfo(contacto){
+            this.$store.commit('userReferer/setFormUserReferer', contacto)
+          }
+        },
+        components: {
+          'b-modal': bModal,
+          UserRefererCard
+        },
+        directives: {
+            'b-modal': bModalDirective
+        }
         // created() {
         //     this.$store.dispatch("Contactos/getAll");
         // }
