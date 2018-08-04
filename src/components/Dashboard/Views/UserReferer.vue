@@ -2,10 +2,10 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-8" v-bind:class="{'col-md-12': !form.firstName}">
+        <div class="col-md-9" v-bind:class="{'col-md-12': !form.firstName}">
           <user-referer-form></user-referer-form>
         </div>
-        <div class="col-md-4" v-if="form.firstName">
+        <div class="col-md-3 card" v-if="form.firstName">
           <user-referer-card></user-referer-card>
         </div>
       </div>

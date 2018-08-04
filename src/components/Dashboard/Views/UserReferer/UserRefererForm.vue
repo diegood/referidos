@@ -31,12 +31,22 @@
           </fg-input>
         </div>
         <div class="col-md-6">
-          <fg-input type="text"
-                    label="Empresa"
-                    placeholder="Nombre de la empresa"
-                    v-model="form.company">
+          <fg-input type="tel"
+                    label="Telefono movil"
+                    placeholder="Telefono movil"
+                    v-model="form.tel"
+                    required>
           </fg-input>
         </div>
+      </div>
+      <div class="row col-12">
+        <b-form-group class="col-8">
+          <h6>Tipo de trabajo</h6>
+          <b-form-checkbox-group v-model="form.trabajos">
+            <b-form-checkbox value="dg">Diseño Grafico</b-form-checkbox>
+            <b-form-checkbox value="dw">Diseño Web</b-form-checkbox>
+          </b-form-checkbox-group>
+        </b-form-group>
       </div>
 
 
@@ -53,14 +63,25 @@
 /* eslint-disable */
   import { mapState } from 'vuex'
   import { mapFields} from 'vuex-map-fields'
+  import checkGrup from 'bootstrap-vue/es/components/form-checkbox/form-checkbox-group'
+  import checbox from 'bootstrap-vue/es/components/form-checkbox/form-checkbox'
+  import bFormGroup from 'bootstrap-vue/es/components/form-group/form-group';
   import Card from 'src/components/UIComponents/Cards/Card.vue'
 
   export default {
     components: {
-      Card
+      Card,
+      'b-form-group': bFormGroup,
+      'b-form-checkbox-group': checkGrup,
+      'b-form-checkbox': checbox
     },
     data () {
       return {
+        selected: '',
+        options: [
+          { text: 'Diseño Grafico', value: 'dg' },
+          { text: 'Diseño Web', value: 'dw' },
+        ]
       }
     },
     computed: {

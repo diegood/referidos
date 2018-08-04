@@ -4,7 +4,7 @@ const state = {
   form: {
     firstName: '',
     lastName: '',
-    company: '',
+    tel: '',
     email: ''
   }
 }

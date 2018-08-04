@@ -1,0 +1,1 @@
+let estados = ['nuevo', 'contactado', 'no encontrado','aceptado', 'rechazado', 'finalizado' ]
