@@ -14,7 +14,7 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end">
         <ul class="navbar-nav ml-auto">
-            <drop-down tag="li">
+            <drop-down tag="li" class="d-none">
               <template slot="title">
                 <i class="nc-icon nc-bell-55"></i>
                 <b class="caret"></b>
@@ -34,38 +34,37 @@
   </nav>
 </template>
 <script>
-  export default {
-    computed: {
-      routeName () {
-        const {name} = this.$route
-        return this.capitalizeFirstLetter(name)
-      }
+export default {
+  computed: {
+    routeName () {
+      const { name } = this.$route
+      return this.capitalizeFirstLetter(name)
+    }
+  },
+  data () {
+    return {
+      activeNotifications: false
+    }
+  },
+  methods: {
+    capitalizeFirstLetter (string) {
+      return string.charAt(0).toUpperCase() + string.slice(1)
     },
-    data () {
-      return {
-        activeNotifications: false
-      }
+    toggleNotificationDropDown () {
+      this.activeNotifications = !this.activeNotifications
     },
-    methods: {
-      capitalizeFirstLetter (string) {
-        return string.charAt(0).toUpperCase() + string.slice(1)
-      },
-      toggleNotificationDropDown () {
-        this.activeNotifications = !this.activeNotifications
-      },
-      closeDropDown () {
-        this.activeNotifications = false
-      },
-      toggleSidebar () {
-        this.$sidebar.displaySidebar(!this.$sidebar.showSidebar)
-      },
-      hideSidebar () {
-        this.$sidebar.displaySidebar(false)
-      }
+    closeDropDown () {
+      this.activeNotifications = false
+    },
+    toggleSidebar () {
+      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar)
+    },
+    hideSidebar () {
+      this.$sidebar.displaySidebar(false)
     }
   }
-
+}
 </script>
-<style>
 
+<style>
 </style>

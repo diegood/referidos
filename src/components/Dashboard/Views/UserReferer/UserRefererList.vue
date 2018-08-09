@@ -10,8 +10,9 @@
     <thead>
       <slot name="columns">
         <th>Nombre</th>
-        <th>Empresa</th>
+        <th>Telefono</th>
         <th>Email</th>
+        <th>fecha Creacion</th>
       </slot>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
           <td>{{userReferer.firstName}}</td>
           <td>{{userReferer.tel}}</td>
           <td>{{userReferer.email}}</td>
+          <td>{{userReferer.creado}}</td>
       </tr>
     </tbody>
   </table> 
@@ -45,6 +47,9 @@
           ...mapState({
               UsersReferers: state => state.Contactos.usersReferers
           })
+        },
+        created() {
+          this.$store.dispatch('Contactos/fetchContacts', { self: this })       
         },
         methods: {
           // setCardInfo(contacto){

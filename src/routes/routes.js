@@ -1,54 +1,36 @@
 import DashboardLayout from '../components/Dashboard/Layout/DashboardLayout.vue'
-// GeneralViews
+// 404
 import NotFound from '../components/GeneralViews/NotFoundPage.vue'
 
-import Overview from 'src/components/Dashboard/Views/Overview.vue'
+import General from 'src/components/Dashboard/Views/General.vue'
 import UserReferer from 'src/components/Dashboard/Views/UserReferer.vue'
-import TableList from 'src/components/Dashboard/Views/TableList.vue'
-import Typography from 'src/components/Dashboard/Views/Typography.vue'
-import Icons from 'src/components/Dashboard/Views/Icons.vue'
-import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
+import RefererList from 'src/components/Dashboard/Views/RefererList.vue'
 
 const routes = [
   {
     path: '/',
     component: DashboardLayout,
-    redirect: '/overview'
+    redirect: '/general'
   },
   {
     path: '/',
     component: DashboardLayout,
-    redirect: '/admin/overview',
+    redirect: '/admin/general',
     children: [
       {
-        path: 'overview',
-        name: 'Overview',
-        component: Overview
+        path: 'general',
+        name: 'General',
+        component: General
       },
       {
-        path: 'referer',
+        path: 'referido',
         name: 'referer',
         component: UserReferer
       },
       {
-        path: 'table-list',
-        name: 'Table List',
-        component: TableList
-      },
-      {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
-      },
-      {
-        path: 'icons',
-        name: 'Icons',
-        component: Icons
-      },
-      {
-        path: 'notifications',
-        name: 'Notifications',
-        component: Notifications
+        path: 'lista-referidos',
+        name: 'Lista de referidos',
+        component: RefererList
       }
     ]
   },

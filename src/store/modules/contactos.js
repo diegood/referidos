@@ -1,4 +1,5 @@
 import Hash from 'object-hash'
+import axios from 'axios'
 // initial state
 const state = {
   usersReferers: {}
@@ -9,11 +10,13 @@ const getters = {}
 
 // actions
 const actions = {
-  getAllContacts ({ commit }) {
-    // aca hay que opneter el modelo desde el server
-    // dabase.getContactos(products => {
-    //   commit('setContacto', products)
-    // })
+  fetchContacts ({ commit }, { self }) {  
+    axios.get('http://localhost:3000/contactos')
+    .then(function (response) {
+      // handle success
+      console.log(response.data)
+      commit('FETCH_CONTACTS', response.data)
+    })
   }
 }
 
@@ -24,7 +27,7 @@ const mutations = {
       state.usersReferers[Hash(contacto)] = contacto
     }
   },
-  setUsersReferers (state, contacto) {
+  FETCH_CONTACTS (state, contacto) {
     state.usersReferers = contacto
   },
   deleteUserReferer (state, { id }) {
