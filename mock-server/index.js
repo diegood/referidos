@@ -9,7 +9,7 @@ class FakeContact {
     this.lastName = fc.lastName()
     this.tel = faker.phone.phoneNumberFormat()
     this.email = faker.internet.email()
-    this.trabajos = faker.helpers.shuffle(['dg', 'dw'])
+    this.trabajos = faker.random.arrayElement(['dg', 'dw'])
     this.creado = faker.date.recent()
   }
 
@@ -38,10 +38,13 @@ function generateFakeObject (TARGETCLASS = '', count = 10) {
     console.error('no se pudo generar')
     return []
   }
-  let result = []
+  let result = {}
   for (var i = 0; i < count; i++) {
     const fp = new TARGETCLASS()
-    result.push(fp.serialize())
+    // let ffp = fp.serialize()
+    // result[Hash(ffp)] = ffp
+    // result.push(fp.serialize())
+    result[Hash(fp.serialize())] = fp.serialize()
   }
   return result
 }

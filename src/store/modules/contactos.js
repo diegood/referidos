@@ -10,7 +10,7 @@ const getters = {}
 
 // actions
 const actions = {
-  fetchContacts ({ commit }, { self }) {  
+  fetchContacts ({ commit }, { self }) {
     axios.get('http://localhost:3000/contactos')
     .then(function (response) {
       // handle success
