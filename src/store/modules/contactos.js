@@ -6,15 +6,17 @@ const state = {
 }
 
 // getters
-const getters = {}
+const getters = {
+  countContacs: state => {
+    return Object.keys(state.usersReferers).length
+  }
+}
 
 // actions
 const actions = {
   fetchContacts ({ commit }, { self }) {
     axios.get('http://localhost:3000/contactos')
     .then(function (response) {
-      // handle success
-      console.log(response.data)
       commit('FETCH_CONTACTS', response.data)
     })
   }
