@@ -11,6 +11,12 @@ class FakeContact {
     this.email = faker.internet.email()
     this.trabajos = faker.random.arrayElement(['dg', 'dw'])
     this.creado = faker.date.recent()
+    this.contrato = {
+      fecha: faker.date.recent(),
+      producto: faker.commerce.productName(),
+      precio: faker.commerce.price(350, 1500, 2, '$')
+    }
+    this.estado = faker.random.arrayElement(['nuevo', 'contrato', 'contactado'])
   }
 
   serialize () {
@@ -21,6 +27,8 @@ class FakeContact {
       tel: this.tel,
       email: this.email,
       creado: this.creado,
+      contrato: this.contrato,
+      estado: this.estado,
       trabajos: this.trabajos
     }
   }
