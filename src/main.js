@@ -1,4 +1,5 @@
 import Vue from 'vue'
+<<<<<<< HEAD
 import App from './App.vue'
 import router from './router/router'
 import store from './store'
@@ -36,3 +37,17 @@ firebase.auth().onAuthStateChanged(function (user) {
     })
   }
 })
+=======
+import './plugins/axios'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+
+Vue.config.productionTip = false
+
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app')
+>>>>>>> master
