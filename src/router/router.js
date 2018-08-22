@@ -18,12 +18,8 @@ let router = new Router({
   linkActiveClass: 'nav-item active',
   routes: [
     {
-      path: '*',
-      redirect: '/login'
-    },
-    {
       path: '/',
-      redirect: '/login'
+      redirect: '/referidos'
     },
     {
       path: '/login',
@@ -39,20 +35,24 @@ let router = new Router({
       path: '/referidos',
       component: DashboardLayout,
       redirect: '/referidos/general',
+      meta: { requieresAuth: true },
       children: [
         {
           path: 'general',
           name: 'General',
+          meta: { requieresAuth: true },
           component: General
         },
         {
           path: 'referido',
           name: 'referer',
+          meta: { requieresAuth: true },
           component: UserReferer
         },
         {
           path: 'lista-referidos',
           name: 'Lista de referidos',
+          meta: { requieresAuth: true },
           component: RefererList
         }
       ]
@@ -67,8 +67,6 @@ router.beforeEach((to, from, next) => {
   if (requiresAuth && !currentUser) {
     next('/login')
   } else if (requiresAuth && currentUser) {
-    next()
-  } else {
     next()
   }
 })

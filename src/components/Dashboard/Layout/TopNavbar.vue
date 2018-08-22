@@ -23,7 +23,7 @@
               <a class="dropdown-item" href="#">Notificacion 1</a>
             </drop-down>
             <a href="#" class="nav-link">
-              <li class="nav-item">
+              <li  v-on:click="logout" class="nav-item">
                 Desconectar 
                  <i class="nc-icon nc-button-power"> </i> 
               </li>
@@ -34,6 +34,8 @@
   </nav>
 </template>
 <script>
+import DropDown from 'src/components/UIComponents/Dropdown.vue'
+import firebase from 'firebase/app'
 export default {
   computed: {
     routeName () {
@@ -61,6 +63,11 @@ export default {
     },
     hideSidebar () {
       this.$sidebar.displaySidebar(false)
+    },
+    logout(){
+      firebase.auth().signOut().then(()=>{
+        this.$router.push('/login')
+      })
     }
   }
 }

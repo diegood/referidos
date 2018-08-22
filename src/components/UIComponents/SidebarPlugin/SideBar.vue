@@ -2,7 +2,7 @@
   <div class="sidebar"
        :style="sidebarStyle"
        :data-color="backgroundColor"
-       :data-image="backgroundImage">
+       >
     <div class="sidebar-wrapper">
       <div class="logo">
         <a href="#" class="simple-text">

@@ -9,18 +9,27 @@
       <a class="dropdown-item" href="#">Notification 1</a>
     </drop-down>
     <li class="nav-item">
-      <a class="nav-link" href="#logout">
-        <span class="no-icon">Desconectar</span>
-      </a>
+      <span class="nav-link" v-on:click="logout">
+        <span class="no-icon"> Desconectar</span>
+      </span>
     </li>
   </ul>
 </template>
 <script>
   import DropDown from 'src/components/UIComponents/Dropdown.vue'
+  import firebase from 'firebase/app'
+  import 'firebase/auth'
 
   export default {
     components: {
       DropDown
+    },
+    methods: {
+      logout(){
+        firebase.auth().signOut().then(()=>{
+          this.$router.push('/login')
+        })
+      }
     }
   }
 </script>
