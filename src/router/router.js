@@ -19,7 +19,7 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/referidos'
+      redirect: '/general'
     },
     {
       path: '/login',
@@ -32,9 +32,9 @@ let router = new Router({
       component: Register
     },
     {
-      path: '/referidos',
+      path: '/',
       component: DashboardLayout,
-      redirect: '/referidos/general',
+      redirect: '/general',
       meta: { requiresAuth: true },
       children: [
         {
