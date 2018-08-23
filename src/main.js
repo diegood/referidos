@@ -18,8 +18,6 @@ let config = {
   storageBucket: 'web4partners.appspot.com',
   messagingSenderId: '431503121350'
 }
-
-
 Vue.prototype.$http = axios
 // plugin setup
 
