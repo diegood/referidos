@@ -63,10 +63,18 @@
 /* eslint-disable */
   import { mapState } from 'vuex'
   import { mapFields} from 'vuex-map-fields'
+  // import { firebaseAction } from 'vuexfire'
   import checkGrup from 'bootstrap-vue/es/components/form-checkbox/form-checkbox-group'
   import checbox from 'bootstrap-vue/es/components/form-checkbox/form-checkbox'
   import bFormGroup from 'bootstrap-vue/es/components/form-group/form-group';
   import Card from 'src/components/UIComponents/Cards/Card.vue'
+//   const setTodosRef = firebaseAction(({ bindFirebaseRef, unbindFirebaseRef }, { ref }) => {
+//   // binding will automatically unbind any previously bound ref so you
+//   // don't need to unbind before binding over an existing bound key
+//   bindFirebaseRef('todos', ref)
+//   // it is possible to unbind a bound key at any time
+//   unbindFirebaseRef('user')
+// })
 
   export default {
     components: {
@@ -106,6 +114,9 @@
             type: 'info'
           })
       }
+    },    
+    created: function () {
+      this.$store.dispatch('Contactos/getFirebaseData');
     }
   }
 

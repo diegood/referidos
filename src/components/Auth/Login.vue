@@ -34,7 +34,7 @@
                 const self = this
                 firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
                     function(user){
-                        self.$router.push('/referidos/general')
+                        self.$router.push('/general')
                     },
                     function(err){
                         alert('Error. '+ err.message);
