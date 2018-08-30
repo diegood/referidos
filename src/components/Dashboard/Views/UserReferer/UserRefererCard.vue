@@ -1,7 +1,7 @@
 <template>
     <div class="container justify-content-center">
         <div class="row center-block m-3">
-            <qrcode v-bind:value="form.firstName" :options="{ size: 150 }" class="img-responsive"></qrcode>
+            <qrcode v-bind:value="form.firstName+form.tel+form.email" :options="{ size: 150 }" class="img-responsive"></qrcode>
         </div>
         <div class="row text-center">
             <p><strong>{{form.firstName}} {{form.lastName}}</strong></p>

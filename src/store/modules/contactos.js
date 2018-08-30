@@ -1,12 +1,13 @@
 import Hash from 'object-hash'
-import axios from 'axios'
+// import axios from 'axios'
 import firebase from './../../firebaseConfig'
-// const settings = {timestampsInSnapshots: true}
-// firebase.settings(settings)
+
 // initial state
 const state = {
   usersReferers: {}
 }
+
+let ref = firebase.db.ref('usuarios/')
 
 // getters
 const getters = {
@@ -18,18 +19,18 @@ const getters = {
 // actions
 const actions = {
   fetchContacts ({ commit }, { self }) {
-    axios.get('http://localhost:3000/contactos')
-    .then(function (response) {
-      commit('FETCH_CONTACTS', response.data)
-    })
-  },
-  getFirebaseData: function (context) {
-    // firebase.db.ref('usuarios/setting').on('value', function (snapshot) {
-    //   context.commit('addUserReferer', snapshot.val())
+    // axios.get('http://localhost:3000/contactos')
+    // .then(function (response) {
+    //   commit('FETCH_CONTACTS', response.data)
     // })
-    firebase.db.collection('contactos').doc('referido').set('value').then(function (snapshot) {
+  },
+  getFirebaseData (context) {
+    ref.on('value', function (snapshot) {
       context.commit('addUserReferer', snapshot.val())
     })
+    // firebase.db.collection('contactos').doc('referido').set('value').then(function (snapshot) {
+    //   context.commit('addUserReferer', snapshot.val())
+    // })
   }
 }
 
@@ -38,6 +39,7 @@ const mutations = {
   addUserReferer (state, contacto) {
     if (contacto.firstName) {
       state.usersReferers[Hash(contacto)] = contacto
+      firebase.db.ref('contactos/' + Hash(contacto)).set(contacto)
       return state
     }
   },
