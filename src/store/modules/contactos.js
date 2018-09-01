@@ -7,7 +7,7 @@ const state = {
   usersReferers: {}
 }
 
-let ref = firebase.db.ref('usuarios/')
+let ref = firebase.db.ref('contactos/')
 
 // getters
 const getters = {
@@ -26,11 +26,8 @@ const actions = {
   },
   getFirebaseData (context) {
     ref.on('value', function (snapshot) {
-      context.commit('addUserReferer', snapshot.val())
+      context.commit('FETCH_CONTACTS', snapshot.val())
     })
-    // firebase.db.collection('contactos').doc('referido').set('value').then(function (snapshot) {
-    //   context.commit('addUserReferer', snapshot.val())
-    // })
   }
 }
 
@@ -43,8 +40,11 @@ const mutations = {
       return state
     }
   },
-  FETCH_CONTACTS (state, contacto) {
-    state.usersReferers = contacto
+  // FETCH_CONTACTS (state, contacto) {
+  //   state.usersReferers = contacto
+  // },
+  FETCH_CONTACTS (state, contactos) {
+    state.usersReferers = contactos
   },
   deleteUserReferer (state, { id }) {
     // const contacto = state.usersReferers.find(contacto => contacto.id === id)

@@ -49,7 +49,8 @@
           })
         },
         created() {
-          this.$store.dispatch('Contactos/fetchContacts', { self: this })       
+          // this.$store.dispatch('Contactos/fetchContacts', { self: this })       
+          this.$store.dispatch('Contactos/getFirebaseData', { self: this })       
         },
         methods: {
           // setCardInfo(contacto){
