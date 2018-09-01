@@ -1,42 +1,44 @@
 <template>
     <div class="login text-center">
-        <form class="form-signin" data-op-form-id="1">
+        <form class="form-signin" data-op-form-id="1" @submit.prevent="onSignin">
             <img class="mb-4" src="http://clientes.web4line.com/assets/dist/img/logo.png" alt="" height="100">
             <h1 class="h3 mb-3 font-weight-normal">Crear una nueva Cuenta</h1>
             <label for="inputEmail" class="sr-only">Email address</label>
             <input type="email" v-model="email" id="inputEmail" class="form-control" placeholder="Dirección de Email" required="" autofocus="" data-op-id="0">
             <label for="inputPassword" class="sr-only">Contraseña</label>
             <input type="password"  v-model="password" id="inputPassword" class="form-control" placeholder="Contraseña" required="" data-op-id="1">
-            <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="registrar">Registrar</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" >Registrar</button>
             <p class="mt-5 mb-3 text-muted"><router-link to="login">login</router-link></p>
         </form>
     </div>
 </template>
 <script>
-/* eslint-disable */
-    import firebase from 'firebase/app'
-    import 'firebase/auth'
-    export default {
-        name: "registrar",
-        data: () => {
-            return {
-                email:'',
-                password:''
-            };
-        },
-        methods: {
-            registrar : function(){
-               firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-                    function(user){
-                        alert('cuenta Creada');
-                    },
-                    function(err){
-                        alert('Error. '+ err.message);
-                    }
-                );
-            }
-        }
+export default {
+  name: "registrar",
+  data: () => {
+    return {
+      email: "",
+      password: ""
     };
+  },
+  methods: {
+    onSignup() {
+      this.$store.dispatch("signUserUp", {
+        email: this.email,
+        password: this.password
+      });
+    },
+    onSigninGoogle() {
+      this.$store.dispatch("signUserInGoogle")
+    },
+    onSigninFacebook() {
+      this.$store.dispatch("signUserInFacebook")
+    },
+    onSigninTwitter() {
+      this.$store.dispatch("signUserInTwitter")
+    }
+  }
+}
 </script>
 <style scoped>
 .login {

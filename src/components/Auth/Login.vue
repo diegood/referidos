@@ -1,6 +1,6 @@
 <template>
     <div class="login text-center">
-        <form class="form-signin" data-op-form-id="1">
+        <form class="form-signin" data-op-form-id="1" @submit.prevent="onSignin">
             <img class="mb-4" src="http://clientes.web4line.com/assets/dist/img/logo.png" alt="" height="100">
             <h1 class="h3 mb-3 font-weight-normal">Ingresar</h1>
             <label for="inputEmail" class="sr-only">Email address</label>
@@ -12,41 +12,82 @@
                 <input type="checkbox" value="remember-me"> Recordarme
                 </label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="login">Ingresar</button>
+            <div class="text-xs-center">
+                <v-btn round color="primary" dark :disabled="loading" :loading="loading" @click.prevent="onSigninGoogle">Google
+                <span slot="loader" class="custom-loader">
+                <v-icon light>cached</v-icon>
+                </span>
+                </v-btn>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
             <p class="mt-5 mb-3 text-muted"><router-link to="/registrar"> crear nueva cuenta</router-link></p>
         </form>
     </div>
 </template>
 <script>
-/* eslint-disable */
-    import firebase from 'firebase/app'
-    import 'firebase/auth'
-    export default {
-        name: 'login',
-        data: function(){
-            return {
-                email:'',
-                password:''
-            };
-        },
-        methods:{
-            login: function(){
-                const self = this
-                firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-                    function(user){
-                        self.$router.push('/general')
-                    },
-                    function(err){
-                        alert('Error. '+ err.message);
-                    }
-                )
-            }
-        }
+import firebase from "firebase/app"
+import "firebase/auth"
+import { mapState } from "vuex"
+export default {
+  name: "login",
+  data: function() {
+    return {
+      email: "",
+      password: ""
     }
+  },
+  computed: {
+    ...mapState({
+      user: state => state.UserSystem.user
+      error: state => state.UserSystem.user
+      loading: state => state.UserSystem.user
+    }),
+    error() {
+      return this.$store.getters.error
+    },
+    loading() {
+      return this.$store.getters.loading
+    }
+  },
+  watch: {
+    user(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push("/general")
+      }
+    }
+  },
+  methods: {
+    login: function() {
+      const self = this
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(
+          function(user) {
+            self.$router.push("/general")
+          },
+          function(err) {
+            alert("Error. " + err.message)
+          }
+        );
+    },
+    onSignin() {
+      this.$store.dispatch("signUserIn", {
+        email: this.email,
+        password: this.password
+      })
+    },
+    onSigninFacebook() {
+      this.$store.dispatch("UserSystem/signUserInFacebook")
+    },
+    onSigninGoogle() {
+      this.$store.dispatch("UserSystem/signUserInGoogle")
+    }
+  }
+}
 </script>
 
 <style scoped>
-
 .login {
   display: -ms-flexbox;
   display: -webkit-box;
@@ -91,6 +132,5 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-
 </style>
 
