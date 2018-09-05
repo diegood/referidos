@@ -38,8 +38,8 @@ export default {
   },
   computed: {
     ...mapState({
-      user: state => state.UserSystem.user
-      error: state => state.UserSystem.user
+      user: state => state.UserSystem.user,
+      error: state => state.UserSystem.user,
       loading: state => state.UserSystem.user
     }),
     error() {

@@ -6,8 +6,14 @@ export default {
     user: null
   },
   mutations: {
-    setUser (state, payload) {
-      state.user = payload
+    setUser (state, user) {
+      let newUser = {
+        id: user.uid,
+        name: user.displayName,
+        email: user.email,
+        photoUrl: user.photoURL
+      }
+      state.user = newUser
     }
   },
   actions: {
@@ -16,16 +22,7 @@ export default {
       commit('clearError', { root: true })
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
         .then(
-          user => {
-            commit('setLoading', false, { root: true })
-            const newUser = {
-              id: user.uid,
-              name: user.displayName,
-              email: user.email,
-              photoUrl: user.photoURL
-            }
-            commit('setUser', newUser)
-          }
+          user => { commit('setUser', user.user) }
         )
         .catch(
           error => {
@@ -40,16 +37,7 @@ export default {
       commit('clearError', { root: true })
       firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
         .then(
-          user => {
-            commit('setLoading', false, { root: true })
-            const newUser = {
-              id: user.uid,
-              name: user.displayName,
-              email: user.email,
-              photoUrl: user.photoURL
-            }
-            commit('setUser', newUser)
-          }
+          user => { commit('setUser', user.user) }
         )
         .catch(
           error => {
@@ -60,25 +48,12 @@ export default {
         )
     },
     signUserInGoogle ({commit}) {
-      commit('setLoading', true, { root: true })
-      commit('clearError', { root: true })
       firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
         .then(
-          user => {
-            commit('setLoading', false, { root: true })
-            const newUser = {
-              id: user.uid,
-              name: user.displayName,
-              email: user.email,
-              photoUrl: user.photoURL
-            }
-            commit('setUser', newUser)
-          }
+          user => { commit('setUser', user.user) }
         )
         .catch(
           error => {
-            commit('setLoading', false, { root: true })
-            commit('setError', error, { root: true })
             console.log(error)
           }
         )
@@ -88,16 +63,7 @@ export default {
       commit('clearError', { root: true })
       firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then(
-          user => {
-            commit('setLoading', false, { root: true })
-            const newUser = {
-              id: user.uid,
-              name: user.displayName,
-              email: user.email,
-              photoUrl: user.photoURL
-            }
-            commit('setUser', newUser)
-          }
+          user => { commit('setUser', user.user) }
         )
         .catch(
           error => {
@@ -112,16 +78,7 @@ export default {
       commit('clearError', { root: true })
       firebase.auth().signInWithPopup(new firebase.auth.TwitterAuthProvider())
         .then(
-          user => {
-            commit('setLoading', false, { root: true })
-            const newUser = {
-              id: user.uid,
-              name: user.displayName,
-              email: user.email,
-              photoUrl: user.photoURL
-            }
-            commit('setUser', newUser)
-          }
+          user => { commit('setUser', user.user) }
         )
         .catch(
           error => {
